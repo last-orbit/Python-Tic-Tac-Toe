@@ -48,15 +48,16 @@ def handle_mouseover(event):
 def start_game():
     game_state["game_started"] = True
     game_state["current_player"] = random.choice(list(players.keys()))
-    if game_state["current_player"] == "X":
-        player_1.style.borderBottom = "2px solid black"
-        player_2.style.borderBottom = "none"
-        player_status.textContent = "Player 1's turn"
-    else:
-        player_1.style.borderBottom = "none"
-        player_2.style.borderBottom = "2px solid black"
-        player_status.textContent = "Player 2's turn"
-    print(game_state["current_player"])
+
+    symbol = game_state["current_player"]
+    player_name = players[symbol]
+    current_element = player_elements[symbol]
+
+    for element in player_elements.values():
+        element.style.borderBottom = "none"
+
+    player_status.textContent = f"{player_name}'s turn"
+    current_element.style.borderBottom = "2px solid black"
     for c in cell:
         c.textContent = ""
 
